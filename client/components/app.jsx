@@ -31,8 +31,8 @@ class App extends Component {
       <div className="app-div">
         <div className="title">Ticket</div>
         <div className="button">
-          <Button bsStyle="primary" bsSize="large" onClick={this.handleClickIssueTicket}>Issue Ticket</Button>
-          <Button bsSize="large" onClick={this.handleClickTicketResults}>Results</Button>
+          <Button bsStyle="warning" bsSize="large" onClick={this.handleClickIssueTicket}>Issue Ticket</Button>
+          <Button bsStyle="info" bsSize="large" onClick={this.handleClickTicketResults}>Results</Button>
         </div>
         {this.state.viewing === 'issue' ? <div className="issue-ticket"><IssueTicket /></div> : null}
         {this.state.viewing === 'results' ? <div className="ticket-results"><TicketResults /></div> : null}

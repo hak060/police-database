@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 import TicketEntry from './TicketEntry.jsx'
+import { Button } from 'react-bootstrap'
 
 function TicketTable (props) {
   return (
-    <div className="each-ticket">
-      {props.ticketList.map((ticket, index) => (<TicketEntry ticket={ticket} key={index}/>))}
-    </div>
+      <div className="grid">
+      
+        {props.ticketList.map((ticket, index) => (
+          // <Button bsSize="large" block>
+            <TicketEntry ticket={ticket} key={index}/>
+          // </Button>
+        ))}
+      
+      </div>
   )
 }
 

@@ -1,9 +1,12 @@
 const router = require('express').Router()
 const models = require('../db/models.js')
 
-router.post('/issueTicket', function (req, res) {
+router.post('/issue', function (req, res) {
   console.log('got issueTicket request', req.body);
-  res.send('got issueTicket request');
+  models.issue.post(req.body, function (err, rows) {
+    console.log('rows ========= ', rows);
+    res.send(rows);
+  })
 })
 
 router.get('/all', function (req, res) {

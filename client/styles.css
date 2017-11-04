@@ -1,0 +1,10 @@
+.ticket-list-entry {
+  border-width: 3px;
+  border-color: black;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 175px);
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import TicketTable from './TicketTable.jsx'
+import { ListGroup } from 'react-bootstrap'
 import axios from 'axios'
 
 export default class TicketResults extends Component {
@@ -10,9 +11,13 @@ export default class TicketResults extends Component {
     this.handleClickFilter = this.handleClickFilter.bind(this)
     this.changeTicketTable = this.changeTicketTable.bind(this)
     this.state = {
-      ticketList: window.ticketList,
-      
+      ticketList: []
     }
+  }
+
+  componentDidMount() {
+    console.log('mounted')
+    this.handleClickAllTicket()
   }
 
   post(ticket) {
@@ -50,16 +55,16 @@ export default class TicketResults extends Component {
     return (
       <div className="ticket-results">
         <div> Results
-          <Button bsStyle="primary" bsSize="large" onClick={this.handleClickAllTicket}>All Tickets</Button>
+          <Button onClick={this.handleClickAllTicket}>All Tickets</Button>
         </div>
         <div>
-          <Button bsStyle="primary" bsSize="large" 
+          <Button bsStyle="info" 
             onClick={this.handleClickFilter.bind(null, 'pending')}>Pending Tickets
           </Button>
-          <Button bsStyle="primary" bsSize="large"
+          <Button 
             onClick={this.handleClickFilter.bind(null, 'dismissed')}>Dismessed Tickets
           </Button>
-          <Button bsStyle="primary" bsSize="large"
+          <Button 
             onClick={this.handleClickFilter.bind(null, 'fined')}>Fined Tickets
           </Button>
         </div>
@@ -70,34 +75,3 @@ export default class TicketResults extends Component {
     )
   }
 }
-
-window.ticketList = [
-  {
-    "name": "jay",
-    "violation": "speeding",
-    "description": "NA",
-    "image": "NA",
-    "result": "pending"
-  },
-  {
-    "name": "kan",
-    "violation": "red light",
-    "description": "NA",
-    "image": "NA",
-    "result": "pending"
-  },
-  {
-    "name": "jay",
-    "violation": "speeding",
-    "description": "NA",
-    "image": "NA",
-    "result": "pending"
-  },
-  {
-    "name": "jeff",
-    "violation": "DUI",
-    "description": "NA",
-    "image": "NA",
-    "result": "pending"
-  }
-];

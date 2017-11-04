@@ -8850,12 +8850,12 @@ var App = function (_Component) {
           { className: 'button' },
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { bsStyle: 'primary', bsSize: 'large', onClick: this.handleClickIssueTicket },
+            { bsStyle: 'warning', bsSize: 'large', onClick: this.handleClickIssueTicket },
             'Issue Ticket'
           ),
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { bsSize: 'large', onClick: this.handleClickTicketResults },
+            { bsStyle: 'info', bsSize: 'large', onClick: this.handleClickTicketResults },
             'Results'
           )
         ),
@@ -40320,7 +40320,7 @@ var IssueTicket = function (_Component) {
   }, {
     key: 'post',
     value: function post(ticket) {
-      _axios2.default.post('http://127.0.0.1:3000/main/issueTicket', ticket).then(function (response) {
+      _axios2.default.post('http://127.0.0.1:3000/main/issue', ticket).then(function (response) {
         return console.log('response ===== ');
       }, ticket);
     }
@@ -40440,13 +40440,18 @@ var TicketResults = function (_Component) {
     _this.handleClickFilter = _this.handleClickFilter.bind(_this);
     _this.changeTicketTable = _this.changeTicketTable.bind(_this);
     _this.state = {
-      ticketList: window.ticketList
-
+      ticketList: []
     };
     return _this;
   }
 
   _createClass(TicketResults, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log('mounted');
+      this.handleClickAllTicket();
+    }
+  }, {
     key: 'post',
     value: function post(ticket) {
       _axios2.default.post('http://127.0.0.1:3000/main/issueTicket', ticket).then(function (response) {
@@ -40494,7 +40499,7 @@ var TicketResults = function (_Component) {
           ' Results',
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { bsStyle: 'primary', bsSize: 'large', onClick: this.handleClickAllTicket },
+            { onClick: this.handleClickAllTicket },
             'All Tickets'
           )
         ),
@@ -40503,19 +40508,19 @@ var TicketResults = function (_Component) {
           null,
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { bsStyle: 'primary', bsSize: 'large',
+            { bsStyle: 'info',
               onClick: this.handleClickFilter.bind(null, 'pending') },
             'Pending Tickets'
           ),
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { bsStyle: 'primary', bsSize: 'large',
+            {
               onClick: this.handleClickFilter.bind(null, 'dismissed') },
             'Dismessed Tickets'
           ),
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { bsStyle: 'primary', bsSize: 'large',
+            {
               onClick: this.handleClickFilter.bind(null, 'fined') },
             'Fined Tickets'
           )
@@ -40536,33 +40541,6 @@ var TicketResults = function (_Component) {
 
 exports.default = TicketResults;
 
-
-window.ticketList = [{
-  "name": "jay",
-  "violation": "speeding",
-  "description": "NA",
-  "image": "NA",
-  "result": "pending"
-}, {
-  "name": "kan",
-  "violation": "red light",
-  "description": "NA",
-  "image": "NA",
-  "result": "pending"
-}, {
-  "name": "jay",
-  "violation": "speeding",
-  "description": "NA",
-  "image": "NA",
-  "result": "pending"
-}, {
-  "name": "jeff",
-  "violation": "DUI",
-  "description": "NA",
-  "image": "NA",
-  "result": "pending"
-}];
-
 /***/ }),
 /* 292 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -40582,14 +40560,21 @@ var _TicketEntry = __webpack_require__(293);
 
 var _TicketEntry2 = _interopRequireDefault(_TicketEntry);
 
+var _reactBootstrap = __webpack_require__(62);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function TicketTable(props) {
   return _react2.default.createElement(
     'div',
-    { className: 'each-ticket' },
+    { className: 'grid' },
     props.ticketList.map(function (ticket, index) {
-      return _react2.default.createElement(_TicketEntry2.default, { ticket: ticket, key: index });
+      return (
+        // <Button bsSize="large" block>
+        _react2.default.createElement(_TicketEntry2.default, { ticket: ticket, key: index })
+        // </Button>
+
+      );
     })
   );
 }
@@ -40611,51 +40596,94 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactBootstrap = __webpack_require__(62);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function TicketEntry(props) {
   return _react2.default.createElement(
-    "div",
-    { className: "ticket-list-entry" },
+    'div',
+    { className: 'grid' },
     _react2.default.createElement(
-      "div",
+      _reactBootstrap.ListGroup,
       null,
-      " ------------ "
-    ),
-    _react2.default.createElement(
-      "div",
-      { className: "ticket-name" },
-      props.ticket.name
-    ),
-    _react2.default.createElement(
-      "div",
-      { className: "ticket-violation" },
-      props.ticket.violation
-    ),
-    _react2.default.createElement(
-      "div",
-      { className: "ticket-description" },
-      props.ticket.description
-    ),
-    _react2.default.createElement(
-      "div",
-      { className: "ticket-image" },
-      props.ticket.image
-    ),
-    _react2.default.createElement(
-      "div",
-      { className: "ticket-result" },
-      props.ticket.result
-    ),
-    _react2.default.createElement(
-      "div",
-      null,
-      " ------------ "
+      _react2.default.createElement(
+        _reactBootstrap.ListGroupItem,
+        null,
+        _react2.default.createElement(
+          'div',
+          { className: 'ticket-name' },
+          'Name: ',
+          props.ticket.name
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ticket-violation' },
+          'Violation: ',
+          props.ticket.violation
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ticket-description' },
+          'Description: ',
+          props.ticket.description
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ticket-image' },
+          'Image: ',
+          props.ticket.image
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'ticket-result' },
+          'Result: ',
+          props.ticket.result
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          props.ticket.result === 'pending' ? _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              { bsStyle: 'primary'
+                /* {onClick= { this.handleClickFilter.bind(null, 'pending') }} */
+              },
+              'DISMISS'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              { bsStyle: 'danger'
+                /* {onClick= { this.handleClickFilter.bind(null, 'dismissed') }} */
+              },
+              'PROSECUTE'
+            )
+          ) : null
+        )
+      )
     )
   );
 }
 
 exports.default = TicketEntry;
+
+/*
+        {props.ticket.result === 'pending' ? 
+        
+          <Button bsStyle="primary" bsSize="large"
+            {onClick={this.handleClickFilter.bind(null, 'pending')}}
+            >DISMISS
+          </Button >
+  <Button bsStyle="primary" bsSize="large"
+    {onClick={this.handleClickFilter.bind(null, 'dismissed')}}
+  >PROSECUTE
+          </Button>
+          : null
+        }
+
+*/
 
 /***/ }),
 /* 294 */

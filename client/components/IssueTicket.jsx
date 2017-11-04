@@ -22,7 +22,7 @@ export default class IssueTicket extends Component {
   }
 
   post(ticket) {
-    axios.post('http://127.0.0.1:3000/main/issueTicket', ticket)
+    axios.post('http://127.0.0.1:3000/main/issue', ticket)
       .then(response => console.log('response ===== '), ticket)
   }
 
