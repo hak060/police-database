@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import TicketTable from './TicketTable.jsx'
+import axios from 'axios'
 
 export default class TicketResults extends Component {
   constructor(props) {
@@ -14,8 +15,17 @@ export default class TicketResults extends Component {
     }
   }
 
+  post(ticket) {
+    axios.post('http://127.0.0.1:3000/main/issueTicket', ticket)
+      .then(response => console.log('response ===== '), ticket)
+  }
+
   handleClickAllTicket() {
     console.log('All Ticket Clicked')
+    axios.get('http://127.0.0.1:3000/main/allTickets')
+      .then(response => {
+        console.log('got all tickets === ', response.data);
+      })
   }
 
   handleClickDismissed() {
