@@ -18,17 +18,11 @@ class App extends Component {
   }
 
   handleClickIssueTicket() {
-    // console.log('handleClickIssueTicket button clicked')
-    var obj = {};
-    obj['viewing'] = 'issue';
-    this.setState(obj, () => {console.log('new state: ', this.state)});
+    this.setState({ viewing: 'issue' }, () => {console.log('new state: ', this.state)});
   }
 
   handleClickTicketResults() {
-    // console.log('handleClickTicketResults button clicked')
-    var obj = {};
-    obj['viewing'] = 'results';
-    this.setState(obj, () => {console.log('new state: ', this.state)});
+    this.setState({ viewing: 'results' }, () => {console.log('new state: ', this.state)});
   }
 
   render() {
@@ -40,15 +34,8 @@ class App extends Component {
           <Button bsStyle="primary" bsSize="large" onClick={this.handleClickIssueTicket}>Issue Ticket</Button>
           <Button bsSize="large" onClick={this.handleClickTicketResults}>Results</Button>
         </div>
-        {this.state.viewing === 'issue' ?
-        <div className="issue-ticket">
-          <IssueTicket />
-        </div>
-        :
-        <div className="ticket-results">
-          <TicketResults />
-        </div>}
-
+        {this.state.viewing === 'issue' ? <div className="issue-ticket"><IssueTicket /></div> : null}
+        {this.state.viewing === 'results' ? <div className="ticket-results"><TicketResults /></div> : null}
       </div>
     )
   }
