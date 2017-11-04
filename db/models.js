@@ -8,7 +8,7 @@ module.exports = {
     post: function(data, callback) {
       let sqlString = `insert into tickets (name, violation, description, image, result) \
         values ("${data.name}", "${data.violation}", "${data.description}", "${data.image}", "pending")`;
-      console.log('sqlString =====', sqlString)
+      // console.log('sqlString =====', sqlString)
       db.connection.query(sqlString, function (err, rows) {
         callback(err, rows);
       });
@@ -27,7 +27,7 @@ module.exports = {
   filter: {
     get: function (keyward, callback) {
       let sqlString = `select * from tickets where result = "${keyward}"`;
-      console.log('sqlString =====', sqlString)
+      // console.log('sqlString =====', sqlString)
       db.connection.query(sqlString, function (err, rows) {
         callback(err, rows);
       });
@@ -41,7 +41,7 @@ module.exports = {
       violation = "${data.ticket.violation}" and \
       description = "${data.ticket.description}" and \
       image = "${data.ticket.image}"`;
-      console.log('sqlString =====', sqlString)
+      // console.log('sqlString =====', sqlString)
       db.connection.query(sqlString, function (err, rows) {
         callback(err, rows);
       });

@@ -10,7 +10,7 @@ export default class IssueTicket extends Component {
     this.state = {
       name: '',
       violation: '',
-      desctiption: '',
+      description: '',
       image: ''
     }
   }
@@ -21,13 +21,9 @@ export default class IssueTicket extends Component {
     this.setState(obj, () => {console.log('new state: ', this.state)});
   }
 
-  post(ticket) {
-    axios.post('http://127.0.0.1:3000/main/issue', ticket)
-      .then(response => console.log('response ===== '), ticket)
-  }
-
   handleClickSubmit() {
-    this.post(this.state)
+    axios.post('http://127.0.0.1:3000/main/issue', this.state)
+      .then(response => console.log('new ticket request ===== ', this.state))
   }
 
   render() {
@@ -36,7 +32,7 @@ export default class IssueTicket extends Component {
         <FormGroup>
           <div><label> Name: <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/></label></div>
           <div><label> Violation: <input type="text" name="violation" value={this.state.violation} onChange={this.handleChange} /></label></div>
-          <div><label> Description: <input type="text" name="desctiption" value={this.state.desctiption} onChange={this.handleChange} /></label></div>
+          <div><label> Description: <input type="text" name="description" value={this.state.description} onChange={this.handleChange} /></label></div>
           <div><label> ImageURL: <input type="text" name="image" value={this.state.image} onChange={this.handleChange} /></label></div>
           <div><input type="submit" value="SUBMIT" onClick={this.handleClickSubmit}/></div>
         </FormGroup>

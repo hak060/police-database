@@ -40300,7 +40300,7 @@ var IssueTicket = function (_Component) {
     _this.state = {
       name: '',
       violation: '',
-      desctiption: '',
+      description: '',
       image: ''
     };
     return _this;
@@ -40318,16 +40318,13 @@ var IssueTicket = function (_Component) {
       });
     }
   }, {
-    key: 'post',
-    value: function post(ticket) {
-      _axios2.default.post('http://127.0.0.1:3000/main/issue', ticket).then(function (response) {
-        return console.log('response ===== ');
-      }, ticket);
-    }
-  }, {
     key: 'handleClickSubmit',
     value: function handleClickSubmit() {
-      this.post(this.state);
+      var _this3 = this;
+
+      _axios2.default.post('http://127.0.0.1:3000/main/issue', this.state).then(function (response) {
+        return console.log('new ticket request ===== ', _this3.state);
+      });
     }
   }, {
     key: 'render',
@@ -40365,7 +40362,7 @@ var IssueTicket = function (_Component) {
               'label',
               null,
               ' Description: ',
-              _react2.default.createElement('input', { type: 'text', name: 'desctiption', value: this.state.desctiption, onChange: this.handleChange })
+              _react2.default.createElement('input', { type: 'text', name: 'description', value: this.state.description, onChange: this.handleChange })
             )
           ),
           _react2.default.createElement(
@@ -40491,6 +40488,7 @@ var TicketResults = function (_Component) {
       _axios2.default.post('http://127.0.0.1:3000/main/changePending', { ticket: ticket, decision: decision }).then(function (response) {
         console.log('result =====', response.data);
       });
+      this.handleClickFilter(decision);
     }
   }, {
     key: 'render',
@@ -40654,7 +40652,7 @@ function TicketEntry(props) {
               _reactBootstrap.Button,
               { bsStyle: 'primary',
                 onClick: function onClick(e) {
-                  return props.handlePendingTicketDecision(props.ticket, 'dismiss');
+                  return props.handlePendingTicketDecision(props.ticket, 'dismissed');
                 }
               },
               'DISMISS'
@@ -40663,7 +40661,7 @@ function TicketEntry(props) {
               _reactBootstrap.Button,
               { bsStyle: 'danger',
                 onClick: function onClick(e) {
-                  return props.handlePendingTicketDecision(props.ticket, 'prosecute');
+                  return props.handlePendingTicketDecision(props.ticket, 'fined');
                 }
               },
               'PROSECUTE'

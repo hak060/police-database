@@ -55,6 +55,7 @@ export default class TicketResults extends Component {
         console.log('result =====', response.data);
       }
     )
+    this.handleClickFilter(decision);
   }
 
   render() {

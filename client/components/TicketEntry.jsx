@@ -17,11 +17,11 @@ function TicketEntry (props) {
           {props.ticket.result === 'pending' ? 
             <div>
             <Button bsStyle="primary"
-                  onClick={(e) => props.handlePendingTicketDecision(props.ticket, 'dismiss')}
+                  onClick={(e) => props.handlePendingTicketDecision(props.ticket, 'dismissed')}
             >DISMISS
             </Button >
             <Button bsStyle="danger"
-                  onClick={(e) => props.handlePendingTicketDecision(props.ticket, 'prosecute')}
+                  onClick={(e) => props.handlePendingTicketDecision(props.ticket, 'fined')}
             >PROSECUTE
             </Button >
             </div>
