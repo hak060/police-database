@@ -8,6 +8,7 @@ function TicketTable (props) {
       <div className="grid">
         {props.ticketList.map((ticket, index) => (
           <TicketEntry ticket={ticket} key={index}
+          handlePendingTicketDecision={props.handlePendingTicketDecision}
           />
         ))}
       </div>

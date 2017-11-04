@@ -1,17 +1,7 @@
 const db = require('./db.js')
 const mysql = require('mysql')
 
-/*
-create table tickets (
-  id integer auto_increment,
-  name text,
-  violation text,
-  description text,
-  image text,
-  result text,
-  primary key (id)
-);
-*/
+
 
 module.exports = {
   issue: {
@@ -42,5 +32,36 @@ module.exports = {
         callback(err, rows);
       });
     }
+  },
+
+  changePending: {
+    post: function (data, callback) {
+      let sqlString = `update tickets set result = "${data.decision}" where \
+      name = "${data.ticket.name}" and \
+      violation = "${data.ticket.violation}" and \
+      description = "${data.ticket.description}" and \
+      image = "${data.ticket.image}"`;
+      console.log('sqlString =====', sqlString)
+      db.connection.query(sqlString, function (err, rows) {
+        callback(err, rows);
+      });
+    }
   }
 }
+
+/*
+  insert into tickets (name, violation) values ("change", "change")
+  update tickets set result = "dismissed" where name = "jay" and violation = "none"
+*/
+
+/*
+create table tickets (
+  id integer auto_increment,
+  name text,
+  violation text,
+  description text,
+  image text,
+  result text,
+  primary key (id)
+);
+*/

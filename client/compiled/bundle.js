@@ -40438,7 +40438,7 @@ var TicketResults = function (_Component) {
 
     _this.handleClickAllTicket = _this.handleClickAllTicket.bind(_this);
     _this.handleClickFilter = _this.handleClickFilter.bind(_this);
-    // this.handlePendingTicketDecision = this.handlePendingTicketDecision.bind(this)
+    _this.handlePendingTicketDecision = _this.handlePendingTicketDecision.bind(_this);
     _this.state = {
       ticketList: []
     };
@@ -40484,19 +40484,14 @@ var TicketResults = function (_Component) {
         });
       });
     }
-
-    // handlePendingTicketDecision(ticket) {
-    //   console.log(ticket, 'Ticket Clicked')
-    //   axios.post('http://127.0.0.1:3000/main/changePending', { ticket: ticket })
-    //     .then(response => {
-    //       console.log('result =====', response.data);
-    //       // this.setState({ ticketList: response.data }, () => {
-    //       //   console.log('new State =====', this.state);
-    //       // })
-    //     }
-    //   )
-    // }
-
+  }, {
+    key: 'handlePendingTicketDecision',
+    value: function handlePendingTicketDecision(ticket, decision) {
+      console.log(ticket, decision);
+      _axios2.default.post('http://127.0.0.1:3000/main/changePending', { ticket: ticket, decision: decision }).then(function (response) {
+        console.log('result =====', response.data);
+      });
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -40539,7 +40534,8 @@ var TicketResults = function (_Component) {
           'div',
           { className: 'ticket-table' },
           _react2.default.createElement(_TicketTable2.default, {
-            ticketList: this.state.ticketList
+            ticketList: this.state.ticketList,
+            handlePendingTicketDecision: this.handlePendingTicketDecision
           })
         )
       );
@@ -40580,7 +40576,8 @@ function TicketTable(props) {
     'div',
     { className: 'grid' },
     props.ticketList.map(function (ticket, index) {
-      return _react2.default.createElement(_TicketEntry2.default, { ticket: ticket, key: index
+      return _react2.default.createElement(_TicketEntry2.default, { ticket: ticket, key: index,
+        handlePendingTicketDecision: props.handlePendingTicketDecision
       });
     })
   );
@@ -40656,14 +40653,18 @@ function TicketEntry(props) {
             _react2.default.createElement(
               _reactBootstrap.Button,
               { bsStyle: 'primary',
-                onClick: console.log('DISMISS button clicked')
+                onClick: function onClick(e) {
+                  return props.handlePendingTicketDecision(props.ticket, 'dismiss');
+                }
               },
               'DISMISS'
             ),
             _react2.default.createElement(
               _reactBootstrap.Button,
               { bsStyle: 'danger',
-                onClick: console.log('PROSECUTE button clicked')
+                onClick: function onClick(e) {
+                  return props.handlePendingTicketDecision(props.ticket, 'prosecute');
+                }
               },
               'PROSECUTE'
             )

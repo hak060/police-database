@@ -9,7 +9,7 @@ export default class TicketResults extends Component {
     super(props)
     this.handleClickAllTicket = this.handleClickAllTicket.bind(this)
     this.handleClickFilter = this.handleClickFilter.bind(this)
-    // this.handlePendingTicketDecision = this.handlePendingTicketDecision.bind(this)
+    this.handlePendingTicketDecision = this.handlePendingTicketDecision.bind(this)
     this.state = {
       ticketList: []
     }
@@ -48,17 +48,14 @@ export default class TicketResults extends Component {
     )
   }
 
-  // handlePendingTicketDecision(ticket) {
-  //   console.log(ticket, 'Ticket Clicked')
-  //   axios.post('http://127.0.0.1:3000/main/changePending', { ticket: ticket })
-  //     .then(response => {
-  //       console.log('result =====', response.data);
-  //       // this.setState({ ticketList: response.data }, () => {
-  //       //   console.log('new State =====', this.state);
-  //       // })
-  //     }
-  //   )
-  // }
+  handlePendingTicketDecision(ticket, decision) {
+    console.log(ticket, decision)
+    axios.post('http://127.0.0.1:3000/main/changePending', { ticket: ticket, decision: decision })
+      .then(response => {
+        console.log('result =====', response.data);
+      }
+    )
+  }
 
   render() {
     return (
@@ -79,6 +76,7 @@ export default class TicketResults extends Component {
         </div>
         <div className="ticket-table"><TicketTable 
           ticketList={this.state.ticketList}
+          handlePendingTicketDecision={this.handlePendingTicketDecision}
         /></div>
       </div>
     )

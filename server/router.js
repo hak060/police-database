@@ -25,4 +25,12 @@ router.post('/filter', function (req, res) {
   })
 })
 
+router.post('/changePending', function (req, res) {
+  // console.log('got pending ticket request =====', req.body.type);
+  models.changePending.post(req.body, function (err, rows) {
+    console.log('rows ========= ', rows);
+    res.send(rows);
+  })
+})
+
 module.exports = router
