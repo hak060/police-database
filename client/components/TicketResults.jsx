@@ -7,6 +7,7 @@ export default class TicketResults extends Component {
   constructor(props) {
     super(props)
     this.handleClickAllTicket = this.handleClickAllTicket.bind(this)
+    this.handleClickPending = this.handleClickPending.bind(this)
     this.handleClickDismissed = this.handleClickDismissed.bind(this)
     this.handleClickFined = this.handleClickFined.bind(this)
     this.changeTicketTable = this.changeTicketTable.bind(this)
@@ -22,18 +23,34 @@ export default class TicketResults extends Component {
 
   handleClickAllTicket() {
     console.log('All Ticket Clicked')
-    axios.get('http://127.0.0.1:3000/main/allTickets')
+    axios.get('http://127.0.0.1:3000/main/all')
       .then(response => {
         console.log('got all tickets === ', response.data);
       })
   }
 
+  handleClickPending() {
+    console.log('Pending Ticket Clicked')
+    axios.get('http://127.0.0.1:3000/main/pending')
+      .then(response => {
+        console.log('got pending tickets === ', response.data);
+      })
+  }
+
   handleClickDismissed() {
     console.log('Dismissed Clicked')
+    axios.get('http://127.0.0.1:3000/main/dismissed')
+      .then(response => {
+        console.log('got dismissed tickets === ', response.data);
+      })
   }
 
   handleClickFined() {
     console.log('Fined Clicked')
+    axios.get('http://127.0.0.1:3000/main/fined')
+      .then(response => {
+        console.log('got fined tickets === ', response.data);
+      })
   }
 
   changeTicketTable() {
@@ -45,6 +62,9 @@ export default class TicketResults extends Component {
       <div className="ticket-results">
         <div> Results
           <Button bsStyle="primary" bsSize="large" onClick={this.handleClickAllTicket}>All Tickets</Button>
+        </div>
+        <div>
+          <Button bsStyle="primary" bsSize="large" onClick={this.handleClickPending}>Pending Tickets</Button>
           <Button bsStyle="primary" bsSize="large" onClick={this.handleClickDismissed}>Dismessed Tickets</Button>
           <Button bsStyle="primary" bsSize="large" onClick={this.handleClickFined}>Fined Tickets</Button>
         </div>

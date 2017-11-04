@@ -40437,6 +40437,7 @@ var TicketResults = function (_Component) {
     var _this = _possibleConstructorReturn(this, (TicketResults.__proto__ || Object.getPrototypeOf(TicketResults)).call(this, props));
 
     _this.handleClickAllTicket = _this.handleClickAllTicket.bind(_this);
+    _this.handleClickPending = _this.handleClickPending.bind(_this);
     _this.handleClickDismissed = _this.handleClickDismissed.bind(_this);
     _this.handleClickFined = _this.handleClickFined.bind(_this);
     _this.changeTicketTable = _this.changeTicketTable.bind(_this);
@@ -40457,19 +40458,33 @@ var TicketResults = function (_Component) {
     key: 'handleClickAllTicket',
     value: function handleClickAllTicket() {
       console.log('All Ticket Clicked');
-      _axios2.default.get('http://127.0.0.1:3000/main/allTickets').then(function (response) {
+      _axios2.default.get('http://127.0.0.1:3000/main/all').then(function (response) {
         console.log('got all tickets === ', response.data);
+      });
+    }
+  }, {
+    key: 'handleClickPending',
+    value: function handleClickPending() {
+      console.log('Pending Ticket Clicked');
+      _axios2.default.get('http://127.0.0.1:3000/main/pending').then(function (response) {
+        console.log('got pending tickets === ', response.data);
       });
     }
   }, {
     key: 'handleClickDismissed',
     value: function handleClickDismissed() {
       console.log('Dismissed Clicked');
+      _axios2.default.get('http://127.0.0.1:3000/main/dismissed').then(function (response) {
+        console.log('got dismissed tickets === ', response.data);
+      });
     }
   }, {
     key: 'handleClickFined',
     value: function handleClickFined() {
       console.log('Fined Clicked');
+      _axios2.default.get('http://127.0.0.1:3000/main/fined').then(function (response) {
+        console.log('got fined tickets === ', response.data);
+      });
     }
   }, {
     key: 'changeTicketTable',
@@ -40488,6 +40503,15 @@ var TicketResults = function (_Component) {
             _reactBootstrap.Button,
             { bsStyle: 'primary', bsSize: 'large', onClick: this.handleClickAllTicket },
             'All Tickets'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.Button,
+            { bsStyle: 'primary', bsSize: 'large', onClick: this.handleClickPending },
+            'Pending Tickets'
           ),
           _react2.default.createElement(
             _reactBootstrap.Button,

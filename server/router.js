@@ -5,19 +5,24 @@ router.post('/issueTicket', function (req, res) {
   res.send('got issueTicket request');
 })
 
-router.get('/allTickets', function (req, res) {
-  console.log('got AllTicket request', req.body);
+router.get('/all', function (req, res) {
+  console.log('got All Ticket request', req.body);
   res.send('got AllTicket request');
 })
 
-router.post('/dismissedTickets', function (req, res) {
-  console.log('got dismissedTickets request', req.body);
-  res.send('got dismissedTickets request');
+router.get('/pending', function (req, res) {
+  console.log('got pending ticket request', req.body);
+  res.send('got pending ticket request');
 })
 
-router.post('/finedTickets', function (req, res) {
-  console.log('got finedTickets request', req.body);
-  res.send('got finedTickets request');
+router.get('/dismissed', function (req, res) {
+  console.log('got dismissed Ticket request', req.body);
+  res.send('got dismissed Ticket request');
+})
+
+router.get('/fined', function (req, res) {
+  console.log('got fined Ticket request', req.body);
+  res.send('got fined Ticket request');
 })
 
 module.exports = router

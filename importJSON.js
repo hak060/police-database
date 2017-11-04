@@ -1,6 +1,6 @@
 const ticketdata = require('./ticketdata.json')
 const mysql = require('mysql')
-const db = require('./server/db/db.js')
+const db = require('./db/db.js')
 
 ticketdata.map(ticket => {
   var sqlString = `insert into tickets (name, violation, description, image, result) \
