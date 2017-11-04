@@ -34,7 +34,10 @@ class App extends Component {
           <Button bsStyle="warning" bsSize="large" onClick={this.handleClickIssueTicket}>Issue Ticket</Button>
           <Button bsStyle="info" bsSize="large" onClick={this.handleClickTicketResults}>Results</Button>
         </div>
-        {this.state.viewing === 'issue' ? <div className="issue-ticket"><IssueTicket /></div> : null}
+        {this.state.viewing === 'issue' ? <div className="issue-ticket">
+          <IssueTicket 
+            handleClickTicketResults={this.handleClickTicketResults}
+          /></div> : null}
         {this.state.viewing === 'results' ? <div className="ticket-results"><TicketResults /></div> : null}
       </div>
     )
