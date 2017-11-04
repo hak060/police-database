@@ -17,11 +17,11 @@ function TicketEntry (props) {
           {props.ticket.result === 'pending' ? 
             <div>
             <Button bsStyle="primary"
-              /* {onClick= { this.handleClickFilter.bind(null, 'pending') }} */
+                  onClick={console.log('DISMISS button clicked')}
             >DISMISS
             </Button >
             <Button bsStyle="danger"
-            /* {onClick= { this.handleClickFilter.bind(null, 'dismissed') }} */
+                  onClick={console.log('PROSECUTE button clicked')}
             >PROSECUTE
             </Button >
             </div>
@@ -34,19 +34,3 @@ function TicketEntry (props) {
 }
 
 export default TicketEntry
-
-/*
-        {props.ticket.result === 'pending' ? 
-        
-          <Button bsStyle="primary" bsSize="large"
-            {onClick={this.handleClickFilter.bind(null, 'pending')}}
-            >DISMISS
-          </Button >
-  <Button bsStyle="primary" bsSize="large"
-    {onClick={this.handleClickFilter.bind(null, 'dismissed')}}
-  >PROSECUTE
-          </Button>
-          : null
-        }
-
-*/

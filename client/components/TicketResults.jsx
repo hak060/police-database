@@ -9,7 +9,7 @@ export default class TicketResults extends Component {
     super(props)
     this.handleClickAllTicket = this.handleClickAllTicket.bind(this)
     this.handleClickFilter = this.handleClickFilter.bind(this)
-    this.changeTicketTable = this.changeTicketTable.bind(this)
+    // this.handlePendingTicketDecision = this.handlePendingTicketDecision.bind(this)
     this.state = {
       ticketList: []
     }
@@ -44,12 +44,21 @@ export default class TicketResults extends Component {
         this.setState({ ticketList: response.data }, () => {
           console.log('new State =====', this.state);
         })
-      })
+      }
+    )
   }
 
-  changeTicketTable() {
-
-  }
+  // handlePendingTicketDecision(ticket) {
+  //   console.log(ticket, 'Ticket Clicked')
+  //   axios.post('http://127.0.0.1:3000/main/changePending', { ticket: ticket })
+  //     .then(response => {
+  //       console.log('result =====', response.data);
+  //       // this.setState({ ticketList: response.data }, () => {
+  //       //   console.log('new State =====', this.state);
+  //       // })
+  //     }
+  //   )
+  // }
 
   render() {
     return (
@@ -62,14 +71,14 @@ export default class TicketResults extends Component {
             onClick={this.handleClickFilter.bind(null, 'pending')}>Pending Tickets
           </Button>
           <Button 
-            onClick={this.handleClickFilter.bind(null, 'dismissed')}>Dismessed Tickets
+            onClick={this.handleClickFilter.bind(null, 'dismissed')}>Dismissed Tickets
           </Button>
           <Button 
             onClick={this.handleClickFilter.bind(null, 'fined')}>Fined Tickets
           </Button>
         </div>
         <div className="ticket-table"><TicketTable 
-          ticketList = {this.state.ticketList}
+          ticketList={this.state.ticketList}
         /></div>
       </div>
     )

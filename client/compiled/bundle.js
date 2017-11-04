@@ -40438,7 +40438,7 @@ var TicketResults = function (_Component) {
 
     _this.handleClickAllTicket = _this.handleClickAllTicket.bind(_this);
     _this.handleClickFilter = _this.handleClickFilter.bind(_this);
-    _this.changeTicketTable = _this.changeTicketTable.bind(_this);
+    // this.handlePendingTicketDecision = this.handlePendingTicketDecision.bind(this)
     _this.state = {
       ticketList: []
     };
@@ -40484,9 +40484,19 @@ var TicketResults = function (_Component) {
         });
       });
     }
-  }, {
-    key: 'changeTicketTable',
-    value: function changeTicketTable() {}
+
+    // handlePendingTicketDecision(ticket) {
+    //   console.log(ticket, 'Ticket Clicked')
+    //   axios.post('http://127.0.0.1:3000/main/changePending', { ticket: ticket })
+    //     .then(response => {
+    //       console.log('result =====', response.data);
+    //       // this.setState({ ticketList: response.data }, () => {
+    //       //   console.log('new State =====', this.state);
+    //       // })
+    //     }
+    //   )
+    // }
+
   }, {
     key: 'render',
     value: function render() {
@@ -40516,7 +40526,7 @@ var TicketResults = function (_Component) {
             _reactBootstrap.Button,
             {
               onClick: this.handleClickFilter.bind(null, 'dismissed') },
-            'Dismessed Tickets'
+            'Dismissed Tickets'
           ),
           _react2.default.createElement(
             _reactBootstrap.Button,
@@ -40565,16 +40575,13 @@ var _reactBootstrap = __webpack_require__(62);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function TicketTable(props) {
+  // this.handlePendingTicketDecision = props.handlePendingTicketDecision.bind(this)
   return _react2.default.createElement(
     'div',
     { className: 'grid' },
     props.ticketList.map(function (ticket, index) {
-      return (
-        // <Button bsSize="large" block>
-        _react2.default.createElement(_TicketEntry2.default, { ticket: ticket, key: index })
-        // </Button>
-
-      );
+      return _react2.default.createElement(_TicketEntry2.default, { ticket: ticket, key: index
+      });
     })
   );
 }
@@ -40648,15 +40655,15 @@ function TicketEntry(props) {
             null,
             _react2.default.createElement(
               _reactBootstrap.Button,
-              { bsStyle: 'primary'
-                /* {onClick= { this.handleClickFilter.bind(null, 'pending') }} */
+              { bsStyle: 'primary',
+                onClick: console.log('DISMISS button clicked')
               },
               'DISMISS'
             ),
             _react2.default.createElement(
               _reactBootstrap.Button,
-              { bsStyle: 'danger'
-                /* {onClick= { this.handleClickFilter.bind(null, 'dismissed') }} */
+              { bsStyle: 'danger',
+                onClick: console.log('PROSECUTE button clicked')
               },
               'PROSECUTE'
             )
@@ -40668,22 +40675,6 @@ function TicketEntry(props) {
 }
 
 exports.default = TicketEntry;
-
-/*
-        {props.ticket.result === 'pending' ? 
-        
-          <Button bsStyle="primary" bsSize="large"
-            {onClick={this.handleClickFilter.bind(null, 'pending')}}
-            >DISMISS
-          </Button >
-  <Button bsStyle="primary" bsSize="large"
-    {onClick={this.handleClickFilter.bind(null, 'dismissed')}}
-  >PROSECUTE
-          </Button>
-          : null
-        }
-
-*/
 
 /***/ }),
 /* 294 */

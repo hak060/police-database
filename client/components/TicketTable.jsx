@@ -3,15 +3,13 @@ import TicketEntry from './TicketEntry.jsx'
 import { Button } from 'react-bootstrap'
 
 function TicketTable (props) {
+  // this.handlePendingTicketDecision = props.handlePendingTicketDecision.bind(this)
   return (
       <div className="grid">
-      
         {props.ticketList.map((ticket, index) => (
-          // <Button bsSize="large" block>
-            <TicketEntry ticket={ticket} key={index}/>
-          // </Button>
+          <TicketEntry ticket={ticket} key={index}
+          />
         ))}
-      
       </div>
   )
 }
