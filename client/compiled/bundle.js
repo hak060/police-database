@@ -40437,12 +40437,11 @@ var TicketResults = function (_Component) {
     var _this = _possibleConstructorReturn(this, (TicketResults.__proto__ || Object.getPrototypeOf(TicketResults)).call(this, props));
 
     _this.handleClickAllTicket = _this.handleClickAllTicket.bind(_this);
-    _this.handleClickPending = _this.handleClickPending.bind(_this);
-    _this.handleClickDismissed = _this.handleClickDismissed.bind(_this);
-    _this.handleClickFined = _this.handleClickFined.bind(_this);
+    _this.handleClickFilter = _this.handleClickFilter.bind(_this);
     _this.changeTicketTable = _this.changeTicketTable.bind(_this);
     _this.state = {
       ticketList: window.ticketList
+
     };
     return _this;
   }
@@ -40457,33 +40456,27 @@ var TicketResults = function (_Component) {
   }, {
     key: 'handleClickAllTicket',
     value: function handleClickAllTicket() {
+      var _this2 = this;
+
       console.log('All Ticket Clicked');
       _axios2.default.get('http://127.0.0.1:3000/main/all').then(function (response) {
         console.log('got all tickets === ', response.data);
+        _this2.setState({ ticketList: response.data }, function () {
+          console.log('new State =====', _this2.state);
+        });
       });
     }
   }, {
-    key: 'handleClickPending',
-    value: function handleClickPending() {
-      console.log('Pending Ticket Clicked');
-      _axios2.default.get('http://127.0.0.1:3000/main/pending').then(function (response) {
-        console.log('got pending tickets === ', response.data);
-      });
-    }
-  }, {
-    key: 'handleClickDismissed',
-    value: function handleClickDismissed() {
-      console.log('Dismissed Clicked');
-      _axios2.default.get('http://127.0.0.1:3000/main/dismissed').then(function (response) {
-        console.log('got dismissed tickets === ', response.data);
-      });
-    }
-  }, {
-    key: 'handleClickFined',
-    value: function handleClickFined() {
-      console.log('Fined Clicked');
-      _axios2.default.get('http://127.0.0.1:3000/main/fined').then(function (response) {
-        console.log('got fined tickets === ', response.data);
+    key: 'handleClickFilter',
+    value: function handleClickFilter(type) {
+      var _this3 = this;
+
+      console.log(type, 'Ticket Clicked');
+      _axios2.default.post('http://127.0.0.1:3000/main/filter', { type: type }).then(function (response) {
+        console.log('result =====', response.data);
+        _this3.setState({ ticketList: response.data }, function () {
+          console.log('new State =====', _this3.state);
+        });
       });
     }
   }, {
@@ -40510,17 +40503,20 @@ var TicketResults = function (_Component) {
           null,
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { bsStyle: 'primary', bsSize: 'large', onClick: this.handleClickPending },
+            { bsStyle: 'primary', bsSize: 'large',
+              onClick: this.handleClickFilter.bind(null, 'pending') },
             'Pending Tickets'
           ),
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { bsStyle: 'primary', bsSize: 'large', onClick: this.handleClickDismissed },
+            { bsStyle: 'primary', bsSize: 'large',
+              onClick: this.handleClickFilter.bind(null, 'dismissed') },
             'Dismessed Tickets'
           ),
           _react2.default.createElement(
             _reactBootstrap.Button,
-            { bsStyle: 'primary', bsSize: 'large', onClick: this.handleClickFined },
+            { bsStyle: 'primary', bsSize: 'large',
+              onClick: this.handleClickFilter.bind(null, 'fined') },
             'Fined Tickets'
           )
         ),

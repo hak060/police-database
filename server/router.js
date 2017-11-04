@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const models = require('../db/models.js')
 
 router.post('/issueTicket', function (req, res) {
   console.log('got issueTicket request', req.body);
@@ -7,22 +8,18 @@ router.post('/issueTicket', function (req, res) {
 
 router.get('/all', function (req, res) {
   console.log('got All Ticket request', req.body);
-  res.send('got AllTicket request');
+  models.all.get(function(err, rows) {
+    console.log('rows ========= ', rows);
+    res.send(rows);
+  })
 })
 
-router.get('/pending', function (req, res) {
-  console.log('got pending ticket request', req.body);
-  res.send('got pending ticket request');
-})
-
-router.get('/dismissed', function (req, res) {
-  console.log('got dismissed Ticket request', req.body);
-  res.send('got dismissed Ticket request');
-})
-
-router.get('/fined', function (req, res) {
-  console.log('got fined Ticket request', req.body);
-  res.send('got fined Ticket request');
+router.post('/filter', function (req, res) {
+  // console.log('got pending ticket request =====', req.body.type);
+  models.filter.get(req.body.type, function(err, rows) {
+    console.log('rows ========= ', rows);
+    res.send(rows);
+  })
 })
 
 module.exports = router

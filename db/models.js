@@ -13,7 +13,8 @@ module.exports = {
 
   filter: {
     get: function (keyward, callback) {
-      let sqlString = `select * from tickets where result = "${keyward.result}"`;
+      var sqlString = `select * from tickets where result = "${keyward}"`;
+      console.log('sqlString =====', sqlString)
       db.connection.query(sqlString, function (err, rows) {
         callback(err, rows);
       });
